@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reco — Canada Enterprise Prospect Report · ON / QC / NS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f2eb;
+    --cream: #ede9de;
+    --red: #c8102e;
+    --red-dim: #8a0b1f;
+    --gold: #b8964a;
+    --gold-light: #e8c97a;
+    --rule: #2a2a35;
+    --muted: #6a6875;
+    --score-a: #1a5c38;
+    --score-b: #2e7d52;
+    --score-c: #b8964a;
+    --score-d: #8a3a1a;
+    --anchor-bg: #0a0f1e;
+    --anchor-border: #b8964a;
+
+    --on: #1a4a7a;
+    --qc: #6a1a1a;
+    --ns: #2a5a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 60px 32px;
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 320px;
+    background: linear-gradient(135deg, transparent 40%, rgba(184,150,74,0.08) 100%);
+    pointer-events: none;
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-logo {
+    width: 44px; height: 44px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: white;
+    letter-spacing: -1px;
+  }
+  .brand-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .brand-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,242,235,0.45);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .masthead-meta {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,242,235,0.45);
+    letter-spacing: 0.08em;
+  }
+  .masthead-meta strong {
+    color: var(--gold);
+    display: block;
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+  .masthead-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--paper);
+    max-width: 680px;
+    margin-bottom: 10px;
+  }
+  .masthead-headline span { color: var(--gold); }
+  .masthead-deck {
+    font-size: 13px;
+    color: rgba(245,242,235,0.65);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+  .province-chips { display: flex; gap: 8px; margin-top: 16px; }
+  .province-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .chip-on { background: rgba(26,74,122,0.6); color: #90b8e8; border: 1px solid rgba(26,74,122,0.8); }
+  .chip-qc { background: rgba(106,26,26,0.6); color: #e89090; border: 1px solid rgba(106,26,26,0.8); }
+  .chip-ns { background: rgba(42,90,42,0.6); color: #90d890; border: 1px solid rgba(42,90,42,0.8); }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    background: var(--red);
+    padding: 14px 60px;
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--red-dim);
+  }
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    color: white;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 48px 60px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    margin-top: 48px;
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    background: var(--ink);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--rule), transparent);
+  }
+
+  /* ── PROVINCE TAG ── */
+  .prov-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+  .pt-on { background: rgba(26,74,122,0.15); color: #1a4a7a; border: 1px solid rgba(26,74,122,0.3); }
+  .pt-qc { background: rgba(106,26,26,0.12); color: #6a1a1a; border: 1px solid rgba(106,26,26,0.25); }
+  .pt-ns { background: rgba(42,90,42,0.12); color: #2a5a2a; border: 1px solid rgba(42,90,42,0.25); }
+
+  /* ── INTEL BOX ── */
+  .intel-box {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    border-radius: 0 4px 4px 0;
+  }
+  .intel-box h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .intel-box p {
+    font-size: 13px;
+    color: #2a2a35;
+    line-height: 1.75;
+  }
+  .intel-box ul { list-style: none; margin-top: 8px; }
+  .intel-box ul li {
+    font-size: 13px;
+    color: #2a2a35;
+    padding: 3px 0;
+    display: flex;
+    gap: 8px;
+  }
+  .intel-box ul li::before {
+    content: '›';
+    color: var(--red);
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* ── VERTICAL PRIORITY GRID ── */
+  .vert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .vert-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px 18px;
+    border-radius: 4px;
+    border-top: 3px solid var(--gold);
+  }
+  .vert-card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .vert-card .vert-prov {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: rgba(245,242,235,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .vert-card p {
+    font-size: 11px;
+    color: rgba(245,242,235,0.7);
+    line-height: 1.5;
+  }
+
+  /* ── REGULATORY BOX ── */
+  .reg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .reg-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.09);
+    border-top: 3px solid var(--gold);
+    padding: 16px 18px;
+    border-radius: 0 0 4px 4px;
+  }
+  .reg-card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .reg-card .reg-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .status-active { background: rgba(26,92,56,0.12); color: #1a5c38; border: 1px solid rgba(26,92,56,0.2); }
+  .status-pending { background: rgba(184,150,74,0.12); color: #8a7030; border: 1px solid rgba(184,150,74,0.2); }
+  .reg-card p {
+    font-size: 11px;
+    color: #3a3a4a;
+    line-height: 1.55;
+  }
+
+  /* ── ANCHOR ACCOUNTS ── */
+  .anchor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .anchor-card {
+    background: var(--anchor-bg);
+    border: 1px solid rgba(184,150,74,0.3);
+    border-top: 3px solid var(--gold);
+    padding: 22px 24px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .anchor-card::before {
+    content: 'ANCHOR';
+    position: absolute;
+    top: 10px; right: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .anchor-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+  .anchor-vertical {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .anchor-buyer {
+    font-size: 12px;
+    color: rgba(245,242,235,0.55);
+    margin-bottom: 4px;
+  }
+  .anchor-buyer strong {
+    color: rgba(245,242,235,0.9);
+    font-size: 13px;
+  }
+  .anchor-why {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(245,242,235,0.7);
+    line-height: 1.6;
+    border-top: 1px solid rgba(184,150,74,0.2);
+    padding-top: 12px;
+  }
+  .anchor-why strong {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .anchor-triggers {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .trigger-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .tag-ai   { background: rgba(200,16,46,0.25); color: #f08090; }
+  .tag-reg  { background: rgba(184,150,74,0.2); color: #e8c97a; }
+  .tag-saas { background: rgba(50,100,200,0.25); color: #80a8f0; }
+  .tag-iam  { background: rgba(100,50,200,0.2); color: #c0a0f0; }
+  .tag-breach { background: rgba(200,80,20,0.25); color: #f0a080; }
+
+  /* ── SCORE LEGEND ── */
+  .score-legend {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ── PROVINCE FILTER BAR ── */
+  .prov-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .pf-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.15);
+    background: white;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--muted);
+  }
+  .pf-btn.active, .pf-btn:hover { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+  .pf-on.active { background: var(--on); border-color: var(--on); color: #90b8e8; }
+  .pf-qc.active { background: var(--qc); border-color: var(--qc); color: #e89090; }
+  .pf-ns.active { background: var(--ns); border-color: var(--ns); color: #90d890; }
+
+  /* ── PROSPECT TABLE ── */
+  .prospect-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .prospect-table thead tr {
+    background: var(--ink);
+    color: var(--gold);
+  }
+  .prospect-table thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .prospect-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: background 0.15s;
+  }
+  .prospect-table tbody tr:hover { background: rgba(184,150,74,0.06); }
+  .prospect-table tbody tr.tier-1 { background: rgba(26,92,56,0.04); }
+  .prospect-table tbody tr.tier-2 { background: rgba(184,150,74,0.03); }
+  .prospect-table tbody td { padding: 10px 14px; vertical-align: top; }
+  .rank-cell {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--muted);
+    width: 36px;
+    padding-right: 0;
+  }
+  .tier-1 .rank-cell { color: var(--score-a); }
+  .tier-2 .rank-cell { color: var(--score-c); }
+  .account-cell strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .account-cell span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .buyer-cell { font-size: 12px; color: var(--ink); }
+  .buyer-cell .title { font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .score-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; height: 24px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+  }
+  .score-90 { background: #1a5c38; }
+  .score-80 { background: #2e7d52; }
+  .score-70 { background: #5a7a32; }
+  .score-60 { background: #b8964a; }
+  .trigger-cell {
+    font-size: 11px;
+    color: #2a2a35;
+    line-height: 1.5;
+    max-width: 260px;
+  }
+  .outreach-cell {
+    font-size: 11px;
+    color: #3a3a4a;
+    font-style: italic;
+    max-width: 220px;
+    line-height: 1.55;
+  }
+  .tier-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  .tier-badge.t1 { background: rgba(26,92,56,0.15); color: #1a5c38; border: 1px solid rgba(26,92,56,0.3); }
+  .tier-badge.t2 { background: rgba(184,150,74,0.12); color: #8a7030; border: 1px solid rgba(184,150,74,0.3); }
+  .tier-badge.t3 { background: rgba(100,100,120,0.1); color: #5a5a6a; border: 1px solid rgba(100,100,120,0.2); }
+
+  /* ── PROFILE CARDS ── */
+  .profile-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-left: 4px solid var(--red);
+    border-radius: 0 6px 6px 0;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+  }
+  .profile-card.anchor-profile {
+    border-left-color: var(--gold);
+    background: #faf8f2;
+  }
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .profile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .profile-vertical {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .profile-score-block { display: flex; align-items: center; gap: 12px; }
+  .profile-score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .score-green { color: var(--score-a); }
+  .score-amber { color: var(--score-c); }
+  .score-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .profile-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .profile-col h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .profile-col p, .profile-col li {
+    font-size: 12px;
+    color: #2a2a35;
+    line-height: 1.65;
+  }
+  .profile-col ul { list-style: none; }
+  .profile-col ul li {
+    padding: 3px 0;
+    display: flex;
+    gap: 6px;
+  }
+  .profile-col ul li::before {
+    content: '▸';
+    color: var(--red);
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .outreach-box {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    grid-column: 1 / -1;
+  }
+  .outreach-box h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .outreach-box .subject {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .outreach-box .body-preview {
+    font-size: 11.5px;
+    color: #3a3a4a;
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  /* ── COMP GRID ── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .comp-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top: 3px solid var(--red);
+    padding: 16px 18px;
+    border-radius: 0 0 4px 4px;
+  }
+  .comp-card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .comp-card p { font-size: 11px; color: #3a3a4a; line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--ink);
+    color: rgba(245,242,235,0.4);
+    padding: 24px 60px;
+    margin-top: 60px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.08em;
+  }
+  .report-footer span { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    .main { padding: 32px 24px; }
+    .masthead { padding: 28px 24px; }
+    .stat-bar { padding: 12px 24px; }
+    .anchor-grid { grid-template-columns: 1fr; }
+    .vert-grid { grid-template-columns: repeat(2, 1fr); }
+    .reg-grid { grid-template-columns: 1fr; }
+    .profile-body { grid-template-columns: 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="brand">
+      <div class="brand-logo">R</div>
+      <div>
+        <div class="brand-text">Reco.ai — Enterprise Intelligence</div>
+        <div class="brand-sub">SaaS &amp; AI Security · Account Intelligence Series</div>
+      </div>
+    </div>
+    <div class="masthead-meta">
+      <strong>Canada Market Report</strong>
+      April 2026 · Q2 Strategic Series<br>
+      Ontario · Québec · Nova Scotia<br>
+      Confidential — Internal Use
+    </div>
+  </div>
+  <div class="masthead-headline">
+    Canada <span>Enterprise</span><br>Prospect Report
+  </div>
+  <div class="masthead-deck">
+    Top 25 scored enterprise accounts across Ontario, Québec, and Nova Scotia. 2,500+ employee threshold. AI adoption trigger required. Regulatory context: Bill C-8/C-26, OSFI Guideline E-23, PIPEDA, Québec Law 25, Ontario PHIPA.
+  </div>
+  <div class="province-chips">
+    <span class="province-chip chip-on">Ontario</span>
+    <span class="province-chip chip-qc">Québec</span>
+    <span class="province-chip chip-ns">Nova Scotia</span>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <span class="stat-num">91%</span>
+    <span class="stat-label">AI Tools Unmanaged</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">400+</span>
+    <span class="stat-label">Days Shadow AI Persists</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">8.5%</span>
+    <span class="stat-label">Sensitive Prompt Rate</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">$670K</span>
+    <span class="stat-label">Added Breach Cost (IBM '25)</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">26%</span>
+    <span class="stat-label">YoY Incident Growth (CCCS)</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section-header">
+    <span class="section-num">§ 01</span>
+    <h2 class="section-title">Canada Market Intelligence</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="intel-box">
+    <h4>Why Ontario, Québec &amp; Nova Scotia Are a Priority Market for Reco</h4>
+    <p>Canada's three target provinces represent one of the most regulatory-pressured, AI-active enterprise corridors in the Americas. Ontario's Toronto metro is the dominant financial services hub for all of Canada — home to the Big Five banks, the country's largest insurers, and the TSX. The combination of OSFI Guideline E-23 (effective May 2027, with preparation expected now), Bill C-8's imminent passage, and PIPEDA/Consumer Privacy Protection Act evolution means Canadian financial and telecom CISOs are facing a regulatory convergence unlike anything the market has seen before. Québec's Law 25 is already in full effect — the most aggressive provincial privacy statute in Canada, with mandatory breach reporting, explicit consent requirements, and appointed Privacy Officers. For enterprises with Québec headquarters or operations, shadow AI tools that process customer or employee personal information without consent are a direct Law 25 liability. Nova Scotia's healthcare anchors (Nova Scotia Health Authority, Emera) and the province's Maritime-region digitization push add a healthcare data angle consistent with Reco's Wellstar Health reference. Across all three provinces, the Canadian Centre for Cyber Security (CCCS) has documented a 26% year-over-year increase in reported incidents through 2025-2026 — and specifically calls out AI adoption as an amplifier for both enterprise risk and attacker capability. The convergence of aggressive AI adoption, regulatory catch-up, and named, reachable security leadership across these accounts makes this a Tier-1 international expansion opportunity for Reco.</p>
+  </div>
+
+  <div class="vert-grid">
+    <div class="vert-card">
+      <h4>Financial Services &amp; Insurance</h4>
+      <div class="vert-prov">ON · QC · Priority 1</div>
+      <p>Manulife, Sun Life, Intact, National Bank, Equitable Bank. OSFI E-23 AI governance mandate; PIPEDA + Law 25 dual exposure. BHG Financial peer reference directly applicable to Canadian FSI.</p>
+    </div>
+    <div class="vert-card">
+      <h4>Telecom &amp; Technology</h4>
+      <div class="vert-prov">ON · Priority 2</div>
+      <p>Rogers, BCE/Bell, OpenText, CGI Group, Shopify. AI sprawl in SaaS-heavy environments; Bill C-8 critical infrastructure obligations; 5G network + cloud convergence complexity.</p>
+    </div>
+    <div class="vert-card">
+      <h4>Transportation &amp; Industrial</h4>
+      <div class="vert-prov">ON · QC · Priority 3</div>
+      <p>CN Rail, Bombardier, CAE. Critical infrastructure designation under Bill C-8; AI in logistics, simulation, and manufacturing; OT/SaaS convergence; national security adjacent.</p>
+    </div>
+    <div class="vert-card">
+      <h4>Healthcare &amp; Energy</h4>
+      <div class="vert-prov">NS · ON · Priority 4</div>
+      <p>Nova Scotia Health Authority, Emera. Ontario PHIPA + OSFI analog. AI in clinical workflows; Wellstar Health reference customer directly applicable. Energy sector C-8 designation pending.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: REGULATORY CONTEXT -->
+  <div class="section-header">
+    <span class="section-num">§ 02</span>
+    <h2 class="section-title">Canadian Regulatory Pressure Map</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="intel-box">
+    <h4>The Regulatory Conversation Every Canadian CISO Is Having Right Now</h4>
+    <p>Canada's regulatory environment for AI and cybersecurity is converging rapidly in 2026. Bill C-8 (née C-26) is in committee and expected to pass — bringing mandatory cybersecurity programs and incident reporting for critical infrastructure operators. OSFI Guideline E-23 requires federally regulated financial institutions to inventory every AI model in use, govern its risk, and maintain documentation through the full lifecycle — a direct mandate for shadow AI discovery. Québec Law 25 is already enforcement-active, with the Commission d'accès à l'information (CAI) investigating unauthorized data use. PIPEDA reform is coming. These aren't future risks — they are active budget conversations happening at every Canadian financial services, telecom, and healthcare CISO desk today.</p>
+  </div>
+
+  <div class="reg-grid">
+    <div class="reg-card">
+      <h4>Bill C-8 (née C-26)</h4>
+      <span class="reg-status status-pending">In Committee — 2026</span>
+      <p>Critical Cyber Systems Protection Act. Mandatory cybersecurity programs, supply chain risk management, and incident reporting for designated critical infrastructure operators. Penalties up to $15M. Finance, telecom, energy, and transport sectors. Expected passage in 2026.</p>
+    </div>
+    <div class="reg-card">
+      <h4>OSFI Guideline E-23</h4>
+      <span class="reg-status status-active">Final — Effective 2027</span>
+      <p>Expanded scope to cover AI/ML models used by federally regulated financial institutions. Requires model inventory, risk assessment, lifecycle governance, and third-party AI accountability. Prep expected now — a direct mandate for shadow AI discovery and SaaS governance programs.</p>
+    </div>
+    <div class="reg-card">
+      <h4>Québec Law 25</h4>
+      <span class="reg-status status-active">Fully In Force</span>
+      <p>Canada's most aggressive provincial privacy statute. Mandatory privacy impact assessments, designated Privacy Officers, explicit consent for data collection, and 72-hour breach reporting. Shadow AI tools processing Québec employee or customer data = direct Law 25 liability.</p>
+    </div>
+    <div class="reg-card">
+      <h4>PIPEDA / CPPA</h4>
+      <span class="reg-status status-pending">Reform Expected 2026</span>
+      <p>Federal private sector privacy modernization expected in 2026. Proposed fines: up to C$25M or 5% of gross global revenue. AI data training consent, algorithmic transparency, and purpose limitation are core themes. Forward-looking CISOs are building compliance infrastructure now.</p>
+    </div>
+    <div class="reg-card">
+      <h4>Ontario PHIPA</h4>
+      <span class="reg-status status-active">Active Enforcement</span>
+      <p>Personal Health Information Protection Act governs health data in Ontario. AI-assisted clinical tools that collect, use, or disclose PHI outside approved systems create direct PHIPA exposure for Ontario healthcare organizations. NS Health Authority analog under Nova Scotia PHIA.</p>
+    </div>
+    <div class="reg-card">
+      <h4>OSFI / AMF AI Oversight</h4>
+      <span class="reg-status status-active">Active 2025–2026</span>
+      <p>Québec's Autorité des marchés financiers (AMF) issued AI oversight guidance for insurers and financial institutions in July 2025 — echoing OSFI's E-23 themes. Dual exposure for QC-headquartered FSI firms: both OSFI and AMF now have active AI governance expectations.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ANCHOR ACCOUNTS -->
+  <div class="section-header">
+    <span class="section-num">§ 03</span>
+    <h2 class="section-title">Always-On Anchor Accounts (5)</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="intel-box">
+    <h4>Anchor Account Criteria</h4>
+    <p>These five accounts represent the highest-conviction, highest-effort targets in the Canadian territory — logos that validate the market if closed, carry confirmed named security leadership, face acute urgency signals matching Reco's core value props, and warrant persistent multi-touch cadences regardless of short-term pipeline status. These are the accounts you research weekly, monitor for trigger events, and always have a next move queued for.</p>
+  </div>
+
+  <div class="anchor-grid">
+
+    <div class="anchor-card">
+      <div class="prov-tag pt-on">Ontario</div>
+      <div class="anchor-name">Manulife Financial</div>
+      <div class="anchor-vertical">Insurance / Asset Management · Toronto, ON · TSX/NYSE</div>
+      <div class="anchor-buyer">Primary Buyer: <strong>Bobby Singh, Global CISO</strong></div>
+      <div class="anchor-buyer" style="margin-top:4px">Named, confirmed active — former TSX CISO, appointed 2024, active in AI security forums</div>
+      <div class="anchor-why">
+        <strong>Why Always-On</strong>
+        Bobby Singh joined as Global CISO in 2024, coming directly from the Toronto Stock Exchange where he served as both CISO and CTO for 10 years. He is active in FS-ISAC, the Canadian Financial Services Cyber Security Governance Council, and AI security forums — including the Business Reimagined: AI Summit in Toronto. Singh is a named, reachable, peer-engaged leader at exactly the moment Manulife faces its most complex regulatory stack: OSFI E-23 requires a full model inventory and AI lifecycle governance program, Québec Law 25 applies to its Quebec operations and employee data, and PIPEDA reform is coming. Manulife has 38,000 employees, 35 million customers globally, and is deploying AI across insurance, wealth management, and customer service. The shadow AI surface — agents, copilots, and unsanctioned tools running on top of policyholder data — is enormous. BHG Financial is a direct reference analog: financial services company, similar scale. Singh is building a new AI governance program now.
+      </div>
+      <div class="anchor-triggers">
+        <span class="trigger-tag tag-ai">AI Governance Build in Progress</span>
+        <span class="trigger-tag tag-reg">OSFI E-23 / Law 25</span>
+        <span class="trigger-tag tag-saas">38K Employee Surface</span>
+        <span class="trigger-tag tag-breach">BHG Financial Reference</span>
+      </div>
+    </div>
+
+    <div class="anchor-card">
+      <div class="prov-tag pt-on">Ontario</div>
+      <div class="anchor-name">Sun Life Financial</div>
+      <div class="anchor-vertical">Insurance / Wealth Management · Toronto, ON · TSX/NYSE</div>
+      <div class="anchor-buyer">Primary Buyer: <strong>Abhay Raman, SVP &amp; Chief Security Officer</strong></div>
+      <div class="anchor-buyer" style="margin-top:4px">Named, confirmed — global CISO mandate, physical security + tech risk accountability, 200+ person security team</div>
+      <div class="anchor-why">
+        <strong>Why Always-On</strong>
+        Abhay Raman is Sun Life's global CSO with an unusually broad mandate — information security, physical security, health and safety, global crisis management, and technology risk all roll up to him. He has publicly worked with AI startups and fintechs in the security, health, and wellness space, and regularly speaks on AI security at industry events. Sun Life has $1.46 trillion AUM, operates in 28 markets, and is actively deploying AI in its Dialogue virtual care platform and digital wealth products. The regulatory exposure is compounded: OSFI E-23 for AI model governance, PIPEDA, and AMF oversight for Québec operations. Raman is exactly the type of CSO who looks at shadow AI as a governance and compliance problem — not just a technical one. A 200+ person global security team has budget and program maturity to move.
+      </div>
+      <div class="anchor-triggers">
+        <span class="trigger-tag tag-ai">AI in Wealth + Virtual Care</span>
+        <span class="trigger-tag tag-reg">OSFI E-23 / PIPEDA / AMF</span>
+        <span class="trigger-tag tag-saas">$1.46T AUM SaaS Footprint</span>
+        <span class="trigger-tag tag-iam">Global Identity Surface</span>
+      </div>
+    </div>
+
+    <div class="anchor-card">
+      <div class="prov-tag pt-on">Ontario</div>
+      <div class="anchor-name">Intact Financial Corporation</div>
+      <div class="anchor-vertical">P&amp;C Insurance · Toronto, ON · TSX · Largest P&amp;C Insurer in Canada</div>
+      <div class="anchor-buyer">Primary Buyer: <strong>VP Information Security / CISO</strong></div>
+      <div class="anchor-buyer" style="margin-top:4px">Active security org; digital transformation mandate; OSFI-regulated</div>
+      <div class="anchor-why">
+        <strong>Why Always-On</strong>
+        Intact is Canada's largest property and casualty insurer with 16,000+ employees and operations across Canada, the UK, and Ireland (through RSA acquisition). The 2021 RSA acquisition created massive SaaS complexity — two large enterprise IT environments still rationalizing post-merger. Intact is subject to OSFI Guideline E-23 and PIPEDA, and its aggressive AI deployment in claims automation, underwriting, and fraud detection means AI tools are proliferating far faster than governance is being built. A P&C insurer with AI in core underwriting workflows that can't demonstrate model inventory and third-party AI accountability is facing direct regulatory exposure. Intact is actively hiring in AI and digital — the shadow AI surface is growing. RSA integration still in progress = elevated identity complexity.
+      </div>
+      <div class="anchor-triggers">
+        <span class="trigger-tag tag-ai">AI in Claims &amp; Underwriting</span>
+        <span class="trigger-tag tag-reg">OSFI E-23 / PIPEDA</span>
+        <span class="trigger-tag tag-saas">RSA Merger SaaS Complexity</span>
+        <span class="trigger-tag tag-iam">Multi-Entity Identity Gap</span>
+      </div>
+    </div>
+
+    <div class="anchor-card">
+      <div class="prov-tag pt-on">Ontario</div>
+      <div class="anchor-name">Rogers Communications</div>
+      <div class="anchor-vertical">Telecommunications · Toronto, ON · TSX/NYSE · 25,000+ Employees</div>
+      <div class="anchor-buyer">Primary Buyer: <strong>VP/CISO Cybersecurity</strong></div>
+      <div class="anchor-buyer" style="margin-top:4px">Active security org; post-2022 outage board mandate; Bill C-8 critical infrastructure designation</div>
+      <div class="anchor-why">
+        <strong>Why Always-On</strong>
+        The July 2022 Rogers nationwide outage — which took down internet, wireless, and 911 services for over 12 million Canadians — created a board-level security and resilience mandate that has driven continuous investment since. Rogers is designated critical infrastructure under the incoming Bill C-8, meaning mandatory cybersecurity program requirements and incident reporting are coming. 5G deployment is creating an expanding network + SaaS convergence surface. With 25,000+ employees and AI actively being deployed in customer service, network operations, and fraud detection, Rogers faces the exact shadow AI discovery problem Reco solves. Former Manulife employee Bobby Singh's Rogers background (2010-2012) may be a warm introduction pathway.
+      </div>
+      <div class="anchor-triggers">
+        <span class="trigger-tag tag-breach">2022 Outage Board Mandate</span>
+        <span class="trigger-tag tag-reg">Bill C-8 Critical Infra</span>
+        <span class="trigger-tag tag-ai">AI in Network + Customer Ops</span>
+        <span class="trigger-tag tag-saas">25K Employee SaaS Surface</span>
+      </div>
+    </div>
+
+    <div class="anchor-card">
+      <div class="prov-tag pt-qc">Québec</div>
+      <div class="anchor-name">CGI Group</div>
+      <div class="anchor-vertical">IT Services / Consulting · Montréal, QC · TSX/NYSE · 90,000+ Employees</div>
+      <div class="anchor-buyer">Primary Buyer: <strong>Global CISO / VP Cybersecurity</strong></div>
+      <div class="anchor-buyer" style="margin-top:4px">Active security org; government client data obligations; AI-native service delivery</div>
+      <div class="anchor-why">
+        <strong>Why Always-On</strong>
+        CGI is the world's fifth-largest IT services company, headquartered in Montréal. With 90,000 employees across 40 countries and deep federal government contracts — including Canadian federal agencies, defence, and intelligence-adjacent work — CGI faces a unique double exposure: its own internal AI governance under Québec Law 25 and PIPEDA, and client data obligations for the sensitive government and healthcare data it processes on behalf of its customers. Shadow AI tools used by CGI employees on client engagements create liability not just for CGI but for its clients. CGI is also actively deploying AI in its service delivery models, creating internal governance complexity. The multi-geography, multi-client nature of CGI's business makes SaaS identity visibility a fundamental operational requirement.
+      </div>
+      <div class="anchor-triggers">
+        <span class="trigger-tag tag-ai">AI in Client Delivery</span>
+        <span class="trigger-tag tag-reg">Law 25 / PIPEDA / Gov't Contracts</span>
+        <span class="trigger-tag tag-saas">90K Employee Global Surface</span>
+        <span class="trigger-tag tag-iam">Multi-Client Identity Complexity</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: TOP 25 TABLE -->
+  <div class="section-header">
+    <span class="section-num">§ 04</span>
+    <h2 class="section-title">Top 25 Scored Prospect List</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="prov-filter-bar">
+    <span class="filter-label">Filter by province:</span>
+    <button class="pf-btn active" data-prov="all" onclick="filterProv('all')">All Provinces</button>
+    <button class="pf-btn pf-on" data-prov="on" onclick="filterProv('on')">Ontario</button>
+    <button class="pf-btn pf-qc" data-prov="qc" onclick="filterProv('qc')">Québec</button>
+    <button class="pf-btn pf-ns" data-prov="ns" onclick="filterProv('ns')">Nova Scotia</button>
+  </div>
+
+  <div class="score-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1a5c38"></div>90–100 · Immediate Priority</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2e7d52"></div>80–89 · High Priority</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#5a7a32"></div>70–79 · Active Pipeline</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b8964a"></div>60–69 · Build &amp; Monitor</div>
+  </div>
+
+  <p style="font-size:11px; color:var(--muted); margin-bottom:16px; font-family:'IBM Plex Mono',monospace;">SCORE = Vertical Fit (25) + Urgency Signals (25) + Security Leadership Confirmed (20) + Reco Trigger Density (20) + Budget Signal (10)</p>
+
+  <table class="prospect-table" id="prospectTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Account</th>
+        <th>Province</th>
+        <th>Primary Buyer</th>
+        <th>Score</th>
+        <th>Top Triggers</th>
+        <th>Subject Line Hook</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">1</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Manulife Financial</strong><span>Insurance / Asset Mgmt · Toronto, ON</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">Bobby Singh, Global CISO<div class="title">Named, confirmed — former TSX CISO/CTO, 2024 appointment</div></td>
+        <td><span class="score-pill score-90">97</span></td>
+        <td class="trigger-cell">OSFI E-23 model inventory mandate; shadow AI on policyholder data; 38K employees; active AI governance build; BHG Financial peer reference</td>
+        <td class="outreach-cell">"OSFI E-23 asks for a model inventory. Shadow AI is the part no one can account for."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">2</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Sun Life Financial</strong><span>Insurance / Wealth · Toronto, ON · TSX/NYSE</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">Abhay Raman, SVP &amp; CSO<div class="title">Named, confirmed — global mandate, 200+ team, AI speaker</div></td>
+        <td><span class="score-pill score-90">96</span></td>
+        <td class="trigger-cell">$1.46T AUM; AI in Dialogue care platform; OSFI E-23 + PIPEDA + AMF triple exposure; active AI startup engagement; 28-country SaaS surface</td>
+        <td class="outreach-cell">"AI in wealth management and virtual care creates a data governance problem at every layer. Reco maps it."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">3</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Shopify</strong><span>Commerce SaaS · Ottawa, ON · NYSE</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">Andrew Dunbar, CISO<div class="title">Named, confirmed — 12-year tenure, also held CIO role</div></td>
+        <td><span class="score-pill score-90">95</span></td>
+        <td class="trigger-cell">8,300+ fully remote employees; millions of merchant transactions; AI-native product (Shopify Magic); shadow AI in distributed workforce; PCI-DSS; PIPEDA</td>
+        <td class="outreach-cell">"8,300 remote employees, a fully distributed SaaS stack, and AI baked into the product. The governance gap is in the middle."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">4</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Rogers Communications</strong><span>Telecom · Toronto, ON · 25,000+ Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">VP/CISO Cybersecurity<div class="title">Active org; post-2022 outage board mandate</div></td>
+        <td><span class="score-pill score-90">93</span></td>
+        <td class="trigger-cell">2022 nationwide outage board mandate; Bill C-8 critical infra designation; AI in network ops; 5G SaaS convergence; 25K employee surface; CRTC oversight</td>
+        <td class="outreach-cell">"After 2022, Rogers' board asked hard questions about visibility. AI in network operations is a new layer they can't see yet."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="qc">
+        <td class="rank-cell">5</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>CGI Group</strong><span>IT Services · Montréal, QC · 90,000 Employees</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">Global CISO / VP Cybersecurity<div class="title">Active org; government data obligations</div></td>
+        <td><span class="score-pill score-90">92</span></td>
+        <td class="trigger-cell">AI in client delivery on government contracts; Law 25 dual exposure; 90K global employees; multi-client SaaS identity complexity; PIPEDA; intelligence-adjacent contracts</td>
+        <td class="outreach-cell">"CGI's AI tools run on client data. Law 25 doesn't care who did the deploying."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">6</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>BCE / Bell Canada</strong><span>Telecom / Media · Verdun, QC / Toronto, ON</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">VP / CISO Cybersecurity<div class="title">Active org; Bill C-8 critical infra; 48K employees</div></td>
+        <td><span class="score-pill score-80">91</span></td>
+        <td class="trigger-cell">Bill C-8 critical infrastructure; CRTC oversight; 48K employees; AI in Bell Media content and network ops; subscriber PII at scale; 2023 workforce restructuring SaaS complexity</td>
+        <td class="outreach-cell">"Bell carries the country's communications infrastructure. Bill C-8 is going to ask for a security program to match."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">7</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Intact Financial</strong><span>P&amp;C Insurance · Toronto, ON · Largest in Canada</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">VP Information Security / CISO<div class="title">Active org; RSA acquisition integration ongoing</div></td>
+        <td><span class="score-pill score-80">90</span></td>
+        <td class="trigger-cell">RSA acquisition two-environment complexity; AI in claims automation + underwriting; OSFI E-23 model inventory; PIPEDA; 16K employees; UK/Ireland operations</td>
+        <td class="outreach-cell">"Two enterprise environments post-RSA. Two AI stacks. OSFI E-23 asks for one inventory."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="qc">
+        <td class="rank-cell">8</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>National Bank of Canada</strong><span>Banking · Montréal, QC · TSX · 30,000 Employees</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active org; OSFI regulated; AI transformation active</div></td>
+        <td><span class="score-pill score-80">89</span></td>
+        <td class="trigger-cell">OSFI E-23 model inventory; Law 25 headquarters exposure; AI in retail and commercial banking; 2024 CWB acquisition SaaS complexity; PIPEDA; 30K employees</td>
+        <td class="outreach-cell">"National Bank added CWB in 2024. One more SaaS environment, one more OSFI model inventory problem."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="qc">
+        <td class="rank-cell">9</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>Hydro-Québec</strong><span>Crown Corp / Energy · Montréal, QC · 21,000 Employees</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / VP Cybersecurity<div class="title">Active org; critical infrastructure; AI in grid ops</div></td>
+        <td><span class="score-pill score-80">88</span></td>
+        <td class="trigger-cell">Bill C-8 critical infrastructure designation; AI in power grid management; Law 25 headquarters; nation-state threat profile; OT/SaaS convergence; export expansion AI programs</td>
+        <td class="outreach-cell">"Energy infrastructure plus AI in grid operations. Bill C-8 is going to put a compliance program requirement on every tool Hydro-Québec runs."</td>
+      </tr>
+
+      <tr class="tier-1" data-prov="on">
+        <td class="rank-cell">10</td>
+        <td class="account-cell"><div class="tier-badge t1">Tier 1</div><br><strong>OpenText</strong><span>Enterprise Software · Waterloo, ON · NASDAQ · 25,000 Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / VP Security<div class="title">Active org; Micro Focus acquisition integration; AI-native</div></td>
+        <td><span class="score-pill score-80">87</span></td>
+        <td class="trigger-cell">Micro Focus acquisition (2023) — two large enterprise SaaS environments integrating; AI-native product strategy (OpenText Aviator); PIPEDA; multi-geography; 25K employees</td>
+        <td class="outreach-cell">"OpenText absorbed Micro Focus and built AI into the core product. The governance gap is the space between the two environments."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="qc">
+        <td class="rank-cell">11</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Bombardier</strong><span>Aerospace / Manufacturing · Montréal, QC · TSX</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active org; Bill C-8 critical infra; AI in design/mfg</div></td>
+        <td><span class="score-pill score-80">85</span></td>
+        <td class="trigger-cell">Bill C-8 aerospace designation; AI in aircraft design and manufacturing; Law 25; export control data sensitivity; supply chain SaaS complexity; 15K employees post-restructuring</td>
+        <td class="outreach-cell">"Aerospace AI means design IP in the prompt. Bombardier's export control obligations make that a federal compliance issue."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">12</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>CN Rail</strong><span>Transportation / Logistics · Montréal HQ / Toronto ops · 25,000+</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active org; Bill C-8 critical infra designation</div></td>
+        <td><span class="score-pill score-80">84</span></td>
+        <td class="trigger-cell">Bill C-8 critical infrastructure (transport); AI in rail operations and logistics; cross-border US-Canada operations; OT/SaaS convergence; supply chain data sensitivity</td>
+        <td class="outreach-cell">"CN runs AI across a 19,500-mile network. Bill C-8 is going to require them to know every tool touching that infrastructure."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">13</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Equitable Bank</strong><span>Digital Banking · Toronto, ON · TSX · 3,000+ Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active org; EQ Bank digital-first growth</div></td>
+        <td><span class="score-pill score-80">83</span></td>
+        <td class="trigger-cell">Digital-first bank with aggressive AI strategy; OSFI E-23 model inventory; PIPEDA; Concentra Bank acquisition (2023) SaaS complexity; challenger bank growth creating ungoverned AI footprint</td>
+        <td class="outreach-cell">"EQ Bank is building AI into everything. OSFI E-23 is going to require them to document every model — including the ones employees found on their own."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="qc">
+        <td class="rank-cell">14</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>CAE Inc.</strong><span>Simulation / Defence · Saint-Laurent, QC · TSX/NYSE</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / VP Cybersecurity<div class="title">Active org; defence + aviation security requirements</div></td>
+        <td><span class="score-pill score-80">82</span></td>
+        <td class="trigger-cell">Defence contracts + AI simulation = classified-adjacent data risk; Bill C-8; Law 25; AI in pilot training and defence simulation; ITAR/EAR export controls; 13,000 employees</td>
+        <td class="outreach-cell">"CAE builds AI into pilot training and defence simulation. The data governance bar for that is higher than any compliance framework yet requires."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">15</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Lightspeed Commerce</strong><span>SaaS / Commerce · Montréal QC / ON ops · NASDAQ</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / Head of Security<div class="title">Active security org; AI-native SaaS product</div></td>
+        <td><span class="score-pill score-70">79</span></td>
+        <td class="trigger-cell">AI-native commerce SaaS; merchant payment + inventory data; Law 25 headquarters; PCI-DSS; post-Ecwid/NuOrder acquisition SaaS complexity; 3,000+ employees</td>
+        <td class="outreach-cell">"Lightspeed merged three commerce platforms. Three SaaS environments, one Law 25 obligation."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">16</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Scotiabank (digital / AI programs)</strong><span>Banking · Toronto, ON · TSX/NYSE · 90,000 Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / VP Cybersecurity<div class="title">Active org; large security program; OSFI regulated</div></td>
+        <td><span class="score-pill score-80">86</span></td>
+        <td class="trigger-cell">OSFI E-23 model inventory at scale; AI in retail + international banking; PIPEDA; 90K employees; multi-country SaaS complexity; shadow AI in analyst and advisor workflows</td>
+        <td class="outreach-cell">"Scotiabank has 90,000 employees in 30 countries using AI to serve clients. OSFI E-23 requires knowing every model in that environment."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">17</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Sun Life Global Investments</strong><span>Asset Management · Toronto, ON · OSFI regulated</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">Head of Security / Deputy CISO<div class="title">Subsidiary security program; Abhay Raman parent oversight</div></td>
+        <td><span class="score-pill score-70">78</span></td>
+        <td class="trigger-cell">Fiduciary AI governance; OSFI E-23; investment data sensitivity; AI in portfolio management and analytics; subsidiary SaaS complexity outside parent visibility</td>
+        <td class="outreach-cell">"Investment management AI running outside the OSFI compliance perimeter is a direct E-23 gap. Sun Life Global is where that happens."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="ns">
+        <td class="rank-cell">18</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Nova Scotia Health Authority</strong><span>Healthcare · Halifax, NS · 22,000 Employees</span></td>
+        <td><span class="prov-tag pt-ns">NS</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active security org; province-wide health system</div></td>
+        <td><span class="score-pill score-80">85</span></td>
+        <td class="trigger-cell">Province-wide clinical AI adoption; PHI in shadow AI tools; Nova Scotia PHIA; Wellstar Health direct peer reference; 22K employees; digital health strategy driving AI deployment</td>
+        <td class="outreach-cell">"Nova Scotia Health is deploying AI in clinical workflows. The 400+ day shadow AI persistence number is the PHI exposure Wellstar Health faced."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="ns">
+        <td class="rank-cell">19</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Emera Inc.</strong><span>Energy / Utilities · Halifax, NS · TSX · 7,500 Employees</span></td>
+        <td><span class="prov-tag pt-ns">NS</span></td>
+        <td class="buyer-cell">CISO / VP Information Security<div class="title">Active org; Bill C-8 critical infrastructure; OT/IT</div></td>
+        <td><span class="score-pill score-70">82</span></td>
+        <td class="trigger-cell">Bill C-8 energy sector critical infra; AI in grid operations; OT/SaaS convergence; US operations (Tampa Electric) create cross-border complexity; PIPEDA + NS privacy law</td>
+        <td class="outreach-cell">"Energy infrastructure, AI in grid ops, and operations on both sides of the border. Bill C-8 applies. SEC cyber disclosure applies to Tampa Electric."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">20</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Intact Investment Management</strong><span>Financial Services · Toronto, ON · OSFI sub</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">Head of Security / CISO<div class="title">Subsidiary of Intact FC; separate security program</div></td>
+        <td><span class="score-pill score-70">76</span></td>
+        <td class="trigger-cell">OSFI E-23 model governance; investment management AI; subsidiary SaaS complexity; PIPEDA; separate identity stack from parent Intact FC — visibility gap between entities</td>
+        <td class="outreach-cell">"Between Intact FC and the investment management subsidiary, there are two identity environments OSFI will expect one governance program to cover."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="qc">
+        <td class="rank-cell">21</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Desjardins Group</strong><span>Financial Co-op · Lévis, QC · 57,000 Employees</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">CISO / VP Cybersecurity<div class="title">Active org; post-2019 breach program; OSFI regulated</div></td>
+        <td><span class="score-pill score-80">87</span></td>
+        <td class="trigger-cell">2019 data breach (9.7M members); post-breach rebuild mandate; OSFI E-23; Law 25 headquarters; AI in banking workflows; 57K employees; federation structure SaaS complexity</td>
+        <td class="outreach-cell">"Desjardins rebuilt after 2019. Shadow AI is the exposure the rebuild didn't fully close — and OSFI E-23 will now ask for the inventory."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">22</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Loblaw Companies</strong><span>Retail / Pharma · Brampton, ON · TSX · 220,000 Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / VP Cybersecurity<div class="title">Active org; PC Optimum loyalty data; AI in retail</div></td>
+        <td><span class="score-pill score-70">79</span></td>
+        <td class="trigger-cell">AI in retail operations + pharmacy + loyalty; PC Optimum = 15M+ member PII dataset; PIPEDA; 220K employees and distributed workforce shadow AI; Shoppers Drug Mart PHI</td>
+        <td class="outreach-cell">"Loblaw has pharmacy, grocery, and a loyalty platform with 15 million Canadians' data. AI is touching all three. PIPEDA touches all three."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="on">
+        <td class="rank-cell">23</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>TD Bank Group (security programs)</strong><span>Banking · Toronto, ON · TSX/NYSE · 100,000 Employees</span></td>
+        <td><span class="prov-tag pt-on">ON</span></td>
+        <td class="buyer-cell">CISO / SVP Information Security<div class="title">Active org; US AML consent order driving governance investment</div></td>
+        <td><span class="score-pill score-80">84</span></td>
+        <td class="trigger-cell">2024 US DOJ/FINTRAC AML consent order — regulatory scrutiny peak; OSFI E-23; AI in retail + commercial banking; PIPEDA; 100K employees; shadow AI in analyst workflows</td>
+        <td class="outreach-cell">"TD is under the most regulatory scrutiny of any Canadian bank right now. AI governance gaps aren't a future problem."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="qc">
+        <td class="rank-cell">24</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Power Corporation of Canada</strong><span>Financial / Holding Co · Montréal, QC · TSX · Multi-subsidiary</span></td>
+        <td><span class="prov-tag pt-qc">QC</span></td>
+        <td class="buyer-cell">Group CISO / VP Cybersecurity<div class="title">Active org; IGM Financial, Great-West Life subsidiaries</div></td>
+        <td><span class="score-pill score-70">77</span></td>
+        <td class="trigger-cell">Multi-entity holding structure (Great-West Life, IGM, Lifeco) = multi-environment SaaS complexity; Law 25; OSFI E-23; AI across financial services subsidiaries; 30K+ combined employees</td>
+        <td class="outreach-cell">"Power Corp is three financial services companies inside one holding structure. OSFI E-23 requires one AI governance program to see all of them."</td>
+      </tr>
+
+      <tr class="tier-2" data-prov="ns">
+        <td class="rank-cell">25</td>
+        <td class="account-cell"><div class="tier-badge t2">Tier 2</div><br><strong>Halifax Regional Municipality / Halifax Port Authority</strong><span>Government / Infrastructure · Halifax, NS</span></td>
+        <td><span class="prov-tag pt-ns">NS</span></td>
+        <td class="buyer-cell">CISO / Director Information Security<div class="title">Active org; port critical infrastructure designation</div></td>
+        <td><span class="score-pill score-70">72</span></td>
+        <td class="trigger-cell">Port critical infrastructure (Bill C-8 transport designation); AI in port operations and municipal services; Transport Canada cyber requirements; NS provincial privacy law</td>
+        <td class="outreach-cell">"Halifax Port is critical infrastructure under Bill C-8. AI in logistics operations means mandatory governance — and shadow AI is the starting gap."</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- SECTION 5: DEEP PROFILE CARDS -->
+  <div class="section-header">
+    <span class="section-num">§ 05</span>
+    <h2 class="section-title">Anchor Account Deep Profiles</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="intel-box">
+    <h4>How to Use These Profiles</h4>
+    <p>Each profile below gives you the full intelligence picture for the anchor account — buyer background, why the account is hot now, the specific Reco value props that land, the regulatory hooks to lead with, and a sample first-touch email framework. These are built for the outreach builder, not for skimming.</p>
+  </div>
+
+  <!-- MANULIFE -->
+  <div class="profile-card anchor-profile">
+    <div class="profile-header">
+      <div>
+        <div class="prov-tag pt-on">Ontario</div>
+        <div class="profile-name">Manulife Financial</div>
+        <div class="profile-vertical">Global Insurance &amp; Asset Management · Toronto · TSX: MFC / NYSE: MFC</div>
+      </div>
+      <div class="profile-score-block">
+        <div>
+          <div class="profile-score-num score-green">97</div>
+          <div class="score-label">Priority Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-col">
+        <h5>Buyer Intelligence</h5>
+        <ul>
+          <li>Bobby Singh - Global CISO, appointed 2024</li>
+          <li>Came from Toronto Stock Exchange — 10 years as CISO and CTO</li>
+          <li>Active in FS-ISAC, CPA Canada (board advisor), Institute of Corporate Directors</li>
+          <li>Attended Business Reimagined AI Summit in Toronto — publicly engaged with AI security themes</li>
+          <li>Previously chaired the Canadian Financial Services Cyber Security Governance Council</li>
+          <li>Earlier in career: Director, Rogers Communications (2010-2012)</li>
+        </ul>
+      </div>
+      <div class="profile-col">
+        <h5>Reco Trigger Density</h5>
+        <ul>
+          <li>OSFI E-23 requires model inventory — shadow AI is the unaccounted portion</li>
+          <li>38,000 employees globally across insurance, wealth, and banking</li>
+          <li>AI deployed in actuarial, customer service, and claims processing</li>
+          <li>35 million customers — policyholder data + PHI equivalent exposure</li>
+          <li>Québec Law 25 applies to Montreal operations and QC employee data</li>
+          <li>BHG Financial is a direct industry peer reference Reco can name</li>
+        </ul>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Regulatory Stack</h5>
+        <p>OSFI E-23 (model inventory, effective 2027, prep now) · PIPEDA · Québec Law 25 · OSFI/AMF dual exposure on QC operations · Insurance Companies Act · John Hancock (US) adds SEC cyber disclosure exposure</p>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Entry Strategy</h5>
+        <p>Lead with OSFI E-23 — Bobby Singh is actively building a governance program. The model inventory mandate is the opening. Shadow AI = the gap in every self-built inventory. Reference BHG Financial. Mention Hard Rock Casino for diversity of reference set. Consider FS-ISAC Canada as a community touchpoint.</p>
+      </div>
+      <div class="outreach-box">
+        <h5>First-Touch Framework</h5>
+        <div class="subject">Subject: OSFI E-23 and the models you haven't found yet</div>
+        <div class="body-preview">Bobby - you're building a model inventory right now. Every CISO at a Canadian insurer is. The problem is OSFI E-23 applies to every model in use — including the ones employees brought in before governance caught up. We see 400+ day persistence on average for shadow AI tools. That's the gap between what shows up in your inventory and what's actually running. We work with financial services companies on exactly this. Worth a quick look?<br><br>— Mark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUN LIFE -->
+  <div class="profile-card anchor-profile">
+    <div class="profile-header">
+      <div>
+        <div class="prov-tag pt-on">Ontario</div>
+        <div class="profile-name">Sun Life Financial</div>
+        <div class="profile-vertical">Insurance / Wealth Management · Toronto · TSX: SLF / NYSE: SLF</div>
+      </div>
+      <div class="profile-score-block">
+        <div>
+          <div class="profile-score-num score-green">96</div>
+          <div class="score-label">Priority Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-col">
+        <h5>Buyer Intelligence</h5>
+        <ul>
+          <li>Abhay Raman — SVP &amp; Chief Security Officer</li>
+          <li>Global mandate: InfoSec + physical security + health/safety + crisis management + tech risk</li>
+          <li>200+ person global security team</li>
+          <li>Actively works with AI startups in security, health, and wellness sectors</li>
+          <li>Regular industry speaker on AI security and cybersecurity strategy</li>
+          <li>Raman is a CSO who frames security as business risk — not just technical compliance</li>
+        </ul>
+      </div>
+      <div class="profile-col">
+        <h5>Reco Trigger Density</h5>
+        <ul>
+          <li>$1.46T AUM creates enormous data sensitivity exposure</li>
+          <li>Dialogue virtual care platform — health + insurance data convergence</li>
+          <li>AI in financial advice, wellness, and underwriting workflows</li>
+          <li>28-market operations = multi-geography SaaS surface</li>
+          <li>OSFI E-23 + PIPEDA + AMF (QC) triple regulatory stack</li>
+          <li>SaaS stack complexity post-international expansion and digital acquisitions</li>
+        </ul>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Regulatory Stack</h5>
+        <p>OSFI E-23 · PIPEDA · Québec AMF AI oversight (July 2025) · Insurance Companies Act · Multiple international privacy regimes (28 countries) · Sun Life U.S. subject to SEC cyber disclosure</p>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Entry Strategy</h5>
+        <p>Raman is a CSO who thinks about business risk — so lead with the OSFI E-23 and AMF regulatory dual-stack, not just the technology. Frame Reco as governance infrastructure, not a detection tool. His AI startup engagement background means he's comfortable with emerging vendors. Wellstar Health reference is applicable given Dialogue health data.</p>
+      </div>
+      <div class="outreach-box">
+        <h5>First-Touch Framework</h5>
+        <div class="subject">Subject: OSFI + AMF AI governance — two different clocks on the same problem</div>
+        <div class="body-preview">Abhay - OSFI's E-23 and Québec's AMF guidance both dropped AI governance requirements in 2025. The difference is timeline - OSFI effective 2027, AMF already active. Most insurance CISOs are building toward one and not moving fast enough on the other. The core problem is the same either way: you can't govern what you can't see. We help financial services companies get visibility into every AI tool in the environment — including the ones that didn't go through procurement. BHG Financial and Wellstar Health are both live references if that's useful context.<br><br>— Mark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPIFY -->
+  <div class="profile-card">
+    <div class="profile-header">
+      <div>
+        <div class="prov-tag pt-on">Ontario</div>
+        <div class="profile-name">Shopify</div>
+        <div class="profile-vertical">Commerce SaaS Platform · Ottawa, ON · NYSE: SHOP</div>
+      </div>
+      <div class="profile-score-block">
+        <div>
+          <div class="profile-score-num score-green">95</div>
+          <div class="score-label">Priority Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-col">
+        <h5>Buyer Intelligence</h5>
+        <ul>
+          <li>Andrew Dunbar — CISO since 2012, also served as CIO</li>
+          <li>Leads the "Trust" team — security philosophy anchored in merchant and customer trust</li>
+          <li>Built security program from 100 employees to 8,300+</li>
+          <li>Advocates for controlled, disciplined toolset approach</li>
+          <li>One of Canada's most tenured and prominent enterprise CISOs</li>
+          <li>World-class bug bounty program ($6M+ paid out)</li>
+        </ul>
+      </div>
+      <div class="profile-col">
+        <h5>Reco Trigger Density</h5>
+        <ul>
+          <li>8,300+ fully remote and distributed employees</li>
+          <li>Shopify Magic — AI built directly into the commerce platform</li>
+          <li>Millions of merchant transactions and sensitive merchant data</li>
+          <li>Distributed SaaS stack with minimal centralized control</li>
+          <li>PCI-DSS + PIPEDA dual compliance obligations</li>
+          <li>Shadow AI in distributed workforce = core governance challenge</li>
+        </ul>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Regulatory Stack</h5>
+        <p>PIPEDA · PCI-DSS · GDPR (European merchant data) · Multiple international privacy regimes · NYSE-listed cyber disclosure · Merchant data protection obligations</p>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Entry Strategy</h5>
+        <p>Dunbar is a sophisticated, long-tenured CISO who has seen every vendor pitch. Lead with specificity — 8,300 remote employees plus AI baked into the product is a different problem than traditional SaaS governance. Shadow AI among a fully remote workforce is the gap. His philosophy of disciplined toolset management actually creates Reco-aligned values. Don't over-pitch. One sharp observation is better than a deck.</p>
+      </div>
+      <div class="outreach-box">
+        <h5>First-Touch Framework</h5>
+        <div class="subject">Subject: 8,300 remote employees and an AI product - the governance is in the middle</div>
+        <div class="body-preview">Andrew - you've built one of the most disciplined security programs in Canada over 12 years. The distributed workforce problem is different now - when your product ships AI and your employees are all remote, the shadow AI surface isn't just unsanctioned tools. It's AI used in the context of the platform itself. We map what's actually running, who's using it, and where merchant data is going. Might be worth seeing what the picture looks like. No deck, happy to just show you.<br><br>— Mark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CGI GROUP -->
+  <div class="profile-card anchor-profile">
+    <div class="profile-header">
+      <div>
+        <div class="prov-tag pt-qc">Québec</div>
+        <div class="profile-name">CGI Group</div>
+        <div class="profile-vertical">IT Services &amp; Consulting · Montréal, QC · TSX: GIB.A / NYSE: GIB</div>
+      </div>
+      <div class="profile-score-block">
+        <div>
+          <div class="profile-score-num score-green">92</div>
+          <div class="score-label">Priority Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-col">
+        <h5>Buyer Intelligence</h5>
+        <ul>
+          <li>Global CISO / VP Cybersecurity — senior security leadership confirmed</li>
+          <li>90,000 employees across 40 countries</li>
+          <li>Canadian federal government contracts — DND, CRA, CBSA adjacent work</li>
+          <li>Active AI practice across consulting and managed services delivery</li>
+          <li>Québec headquarters = Law 25 compliance obligations</li>
+          <li>World's 5th largest IT services company by revenue</li>
+        </ul>
+      </div>
+      <div class="profile-col">
+        <h5>Reco Trigger Density</h5>
+        <ul>
+          <li>AI tools used by consultants on government client engagements</li>
+          <li>Client data liability — shadow AI creates downstream client exposure</li>
+          <li>Multi-geography, multi-client SaaS identity complexity</li>
+          <li>Law 25 — headquarters in Montréal; employee and client data</li>
+          <li>Government-adjacent contracts = elevated data handling standards</li>
+          <li>Active AI integration in managed services and delivery models</li>
+        </ul>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Regulatory Stack</h5>
+        <p>Québec Law 25 · PIPEDA · GDPR (European operations) · Government security clearance requirements · Multiple national security frameworks across 40 countries · Treasury Board of Canada cloud security controls</p>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Entry Strategy</h5>
+        <p>The client liability angle is the sharpest hook for CGI — shadow AI used on client work is a data governance and liability problem, not just an internal one. Law 25 is already in force for their Montréal headquarters. Lead with the client data exposure angle first, then the internal governance story. Cencora is a supply chain reference that resonates with service delivery companies.</p>
+      </div>
+      <div class="outreach-box">
+        <h5>First-Touch Framework</h5>
+        <div class="subject">Subject: AI on client engagements — Law 25 doesn't distinguish between your tools and theirs</div>
+        <div class="body-preview">At CGI the security question isn't just what tools your employees are using internally. It's what AI tools are running on engagement — when client data is in the environment. Law 25 doesn't distinguish between CGI's governance obligations and those of the client. We work with large professional services and technology companies to map every AI tool in the environment, by engagement type and data classification. It's a different problem than standard SaaS governance and most traditional tools miss it. Worth 20 minutes to show you what the picture looks like?<br><br>— Mark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVA SCOTIA HEALTH AUTHORITY -->
+  <div class="profile-card anchor-profile">
+    <div class="profile-header">
+      <div>
+        <div class="prov-tag pt-ns">Nova Scotia</div>
+        <div class="profile-name">Nova Scotia Health Authority</div>
+        <div class="profile-vertical">Provincial Healthcare System · Halifax, NS · 22,000 Employees</div>
+      </div>
+      <div class="profile-score-block">
+        <div>
+          <div class="profile-score-num score-green">85</div>
+          <div class="score-label">Priority Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-col">
+        <h5>Buyer Intelligence</h5>
+        <ul>
+          <li>CISO / VP Information Security — active organization confirmed</li>
+          <li>22,000 employees across 130+ facilities province-wide</li>
+          <li>Nova Scotia provincial digital health strategy driving AI adoption</li>
+          <li>Wellstar Health (Reco customer) is a direct peer analog — same size, similar structure</li>
+          <li>PHIA (Nova Scotia Personal Health Information Act) governs PHI</li>
+          <li>IWK Health and NSHA operate as combined provincial health authority</li>
+        </ul>
+      </div>
+      <div class="profile-col">
+        <h5>Reco Trigger Density</h5>
+        <ul>
+          <li>AI in clinical workflows — nursing, diagnostics, administrative</li>
+          <li>PHI in shadow AI tools = direct PHIA liability</li>
+          <li>400+ day shadow AI persistence applies directly to clinical settings</li>
+          <li>Wellstar Health reference is the closest possible peer analogy</li>
+          <li>Distributed 130+ location SaaS footprint across the province</li>
+          <li>Digital health expansion strategy = accelerating AI adoption</li>
+        </ul>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Regulatory Stack</h5>
+        <p>Nova Scotia PHIA · PIPEDA (federal overlay) · CCCS national health sector guidance · Canadian Centre for Healthcare Cybersecurity standards · IPC Nova Scotia oversight</p>
+      </div>
+      <div class="profile-col" style="margin-top:12px">
+        <h5>Entry Strategy</h5>
+        <p>Lead with Wellstar Health as the reference — it's the closest possible analog. Clinical AI sprawl + PHI in prompts + 400+ day persistence is the three-part story. Provincial healthcare CISOs respond to peer references more than any other signal. Ask about their current approach to inventorying AI tools in clinical workflows. That conversation sells itself.</p>
+      </div>
+      <div class="outreach-box">
+        <h5>First-Touch Framework</h5>
+        <div class="subject">Subject: Wellstar Health found AI in 400+ clinical systems. NSHA is a similar footprint.</div>
+        <div class="body-preview">Wellstar Health — a large regional health system with a similar distributed clinical footprint to NS Health — found shadow AI tools that had been running for over 400 days before their security team knew about them. Some were on patient-facing workflows. PHIA creates direct liability when PHI ends up in an uncontrolled AI tool. We do one thing: give health systems visibility into every AI and SaaS application in the environment, including what data is going in. Worth a call to walk you through what Wellstar found and how they approached it?<br><br>— Mark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: COMPETITIVE -->
+  <div class="section-header">
+    <span class="section-num">§ 06</span>
+    <h2 class="section-title">Canadian Market Competitive Landscape</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="intel-box">
+    <h4>What You'll Encounter in Canadian Enterprise Accounts</h4>
+    <p>Canadian enterprise security buyers operate differently from US peers in a few key ways: regulatory context skews toward OSFI, Law 25, and PIPEDA rather than SEC or HIPAA — so you need to translate value props accordingly. Canadian CISOs tend to be more conservative about new vendor engagement and respond strongly to peer references (especially Canadian ones). The incumbent CASB, DLP, and IAM players are the same, but the framing around AI governance is newer and less crowded in Canada than in the US market — which is an advantage for Reco right now.</p>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <h4>Obsidian Security</h4>
+      <p>SaaS security posture management. Likely present in Canadian FSI accounts. Note: Sunil Seshadri at HealthEquity (US) sits on Obsidian's board — not directly relevant to Canadian accounts, but flag if you encounter overlap with US enterprise engagements.</p>
+    </div>
+    <div class="comp-card">
+      <h4>Grip Security / Valence</h4>
+      <p>SaaS identity risk management. Growing presence in Canadian financial services. Differentiate Reco on AI-specific discovery and behavioral anomaly detection — Grip lacks the AI sprawl narrative. Law 25 and OSFI E-23 framing is a Reco-specific edge.</p>
+    </div>
+    <div class="comp-card">
+      <h4>CrowdStrike / Microsoft Defender</h4>
+      <p>Broad platform players expanding into SaaS security. Canadian FSI accounts often have existing MSFT relationships. Reco's advantage: purpose-built for SaaS identity and AI governance vs. tacked-on capability. Agentless deployment is a specific differentiator in OSFI-regulated environments.</p>
+    </div>
+    <div class="comp-card">
+      <h4>Deloitte / KPMG / MNP</h4>
+      <p>Canadian advisory firms are building AI governance practices. KPMG specifically published Bill C-8 analysis. These firms are potential channel partners, not just competitors — especially for OSFI E-23 compliance programs where they're doing the gap assessment.</p>
+    </div>
+    <div class="comp-card">
+      <h4>Darktrace / Vectra AI</h4>
+      <p>Behavioral AI security. Sometimes positioned in Canadian enterprise accounts against Reco. Key differentiation: Reco is a SaaS and AI governance platform — identity behavior in SaaS context vs. network anomaly detection. Different buyer, different problem.</p>
+    </div>
+    <div class="comp-card">
+      <h4>DIY / CASB (Netskope, Zscaler)</h4>
+      <p>Many Canadian enterprises are trying to solve AI governance with existing CASB tools. Frame Reco against the CASB: Reco discovers OAuth-connected apps, unsanctioned AI integrations, and identity behavior that CASB misses because it doesn't have SaaS-native visibility. OSFI E-23 requires model inventory — CASB doesn't give you that.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7: OUTREACH PLAYBOOK -->
+  <div class="section-header">
+    <span class="section-num">§ 07</span>
+    <h2 class="section-title">Canada Outreach Playbook</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="vert-grid">
+    <div class="vert-card">
+      <h4>Lead With Regulation</h4>
+      <div class="vert-prov">FSI + Telecom</div>
+      <p>For any OSFI-regulated account, lead with E-23 model inventory. "Shadow AI is the gap in every self-built model inventory" is a specific, non-generic hook. Law 25 for QC-HQ accounts. Bill C-8 for telecom, energy, transport.</p>
+    </div>
+    <div class="vert-card">
+      <h4>Lead With Peer Reference</h4>
+      <div class="vert-prov">Healthcare + FSI</div>
+      <p>Wellstar Health for healthcare. BHG Financial for financial services. Cencora for services/distribution. Hard Rock Casino for any gaming or hospitality analogs. Canadian buyers respond to peer references — name them early.</p>
+    </div>
+    <div class="vert-card">
+      <h4>Acquisition &amp; Merger Angle</h4>
+      <div class="vert-prov">Intact, OpenText, National Bank</div>
+      <p>RSA acquisition (Intact), Micro Focus (OpenText), CWB (National Bank) — these are active post-merger SaaS environments with unresolved visibility gaps. "Two environments, one OSFI inventory" is a sharp, specific hook.</p>
+    </div>
+    <div class="vert-card">
+      <h4>AI Product Angle</h4>
+      <div class="vert-prov">Shopify, CGI, Lightspeed</div>
+      <p>For AI-native or AI-first companies, the shadow AI problem is internal governance, not just compliance. "Your employees use AI the same way your customers do — outside the guardrails" lands differently than a regulatory frame.</p>
+    </div>
+  </div>
+
+  <div class="intel-box">
+    <h4>Canadian CISO Community &amp; Engagement Calendar</h4>
+    <ul>
+      <li>FS-ISAC Canada — primary community for Canadian FSI CISOs. Bobby Singh (Manulife) is active. Abhay Raman (Sun Life) engages here. Entry point for financial services accounts.</li>
+      <li>Rogers Cybersecure Catalyst (Toronto Metropolitan University) — premier Canadian cybersecurity hub. Advisory board includes CISOs from RBC, Ontario Power Generation, Darktrace. Community events and roundtables throughout the year.</li>
+      <li>SecTor Canada (Toronto) — fall conference, strong enterprise CISO attendance. Comparable to a mid-tier US regional RSA event.</li>
+      <li>IAPP Canada Privacy Symposium — primary venue for Law 25 / PIPEDA discussions. Privacy + security buyer convergence in one room.</li>
+      <li>Canadian Centre for Cyber Security events — CCCS hosts government and industry briefings on threat landscape and regulatory direction. High-value for critical infrastructure accounts (telecom, energy, transport).</li>
+      <li>CIO/CISO Summit Canada — executive-level annual event, strong FSI and telecom attendance. Entry into named buyers who don't attend US conferences.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div>Reco.ai · <span>Canada Enterprise Prospect Report</span> · Ontario / Québec / Nova Scotia · April 2026</div>
+  <div>Confidential — Internal Use Only · Mark · AE</div>
+  <div>reco.ai · <span>SaaS &amp; AI Security</span></div>
+</div>
+
+<script>
+function filterProv(prov) {
+  const rows = document.querySelectorAll('#prospectTable tbody tr');
+  rows.forEach(row => {
+    if (prov === 'all' || row.dataset.prov === prov) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+  document.querySelectorAll('.pf-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.dataset.prov === prov) btn.classList.add('active');
+  });
+}
+</script>
+
+</body>
+</html>
